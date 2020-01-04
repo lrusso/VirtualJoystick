@@ -1,6 +1,6 @@
 # Virtual Joystick
 
-VirtualJoystick for mobile devices.
+VirtualJoystick for mobile devices based on bobboteck code, with several updates and bugfixes.
 
 ## Web:
 
