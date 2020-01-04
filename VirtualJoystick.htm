@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Virtual Joystick</title>
+		<meta name="theme-color" content="#000000">
+		<script src="VirtualJoystick.js"></script>
+		<style>
+			body{background-color:black;overflow-y:hidden;font-family:Arial;font-size:50px;color:white}
+			span{position:fixed;left:0;right:0;top:0;bottom:0;margin:auto auto;width:50px;height:50px}
+			div{position:fixed;left:0;bottom:0;width:235px;height:265px}
+		</style>
+		<meta name="viewport" content="width=500,user-scalable=no"/>
+	</head>
+	<body>
+		TEST THIS JOYSTICK IN A MOBILE DEVICE.
+		<div id="joyDiv"></div>
+		<span></span>
+		<script>
+
+			var joystick = new JoyStick("joyDiv");
+
+			setInterval(function()
+				{
+				var joystickDirection = joystick.GetDir();
+				switch(joystickDirection)
+					{
+					case "N":
+					document.getElementsByTagName("span")[0].innerHTML = "N";
+					break;
+
+					case "S":
+					document.getElementsByTagName("span")[0].innerHTML = "S";
+					break;
+
+					case "W":
+					document.getElementsByTagName("span")[0].innerHTML = "W";
+					break;
+
+					case "E":
+					document.getElementsByTagName("span")[0].innerHTML = "E";
+					break;
+
+					case "NW":
+					document.getElementsByTagName("span")[0].innerHTML = "NW";
+					break;
+
+					case "NE":
+					document.getElementsByTagName("span")[0].innerHTML = "NE";
+					break;
+
+					case "SE":
+					document.getElementsByTagName("span")[0].innerHTML = "SE";
+					break;
+
+					case "SW":
+					document.getElementsByTagName("span")[0].innerHTML = "SW";
+					break;
+
+					default:
+					document.getElementsByTagName("span")[0].innerHTML = "";
+					break;
+					}
+				}, 25);
+
+		</script>
+	</body>
+</html>
