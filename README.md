@@ -1,7 +1,3 @@
-# NEWER VERSION AVAILABLE AT:
-
-https://github.com/lrusso/VirtualJoystick2
-
 # Virtual Joystick
 
 VirtualJoystick for mobile devices based on bobboteck code, with several updates and bugfixes.
