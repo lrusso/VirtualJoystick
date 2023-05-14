@@ -77,6 +77,7 @@ var JoyStick = (function(container, parameters) {
 	// Used to save current position of stick
 	var movedX=centerX;
 	var movedY=centerY;
+	var currentFinger = -1;
 
 	canvas.addEventListener('touchstart', onTouchStart, false);
 	canvas.addEventListener('touchmove', onTouchMove, false);
@@ -133,6 +134,19 @@ var JoyStick = (function(container, parameters) {
 	function onTouchStart(event) 
 	{
 		pressed=1;
+
+		var rect = canvas.getBoundingClientRect();
+
+		var canvasWidth = rect.left + canvas.offsetWidth;
+		var canvasHeight = rect.top;
+
+		for (var i=0; i < event.touches.length; i++)
+			{
+			if (event.touches[i].pageX<=canvasWidth && event.touches[i].pageY>=canvasHeight)
+				{
+				currentFinger = i;
+				}
+			}
 	}
 	function onTouchMove(event) {
 		// Prevent the browser from doing its default thing (scroll, zoom)
@@ -141,20 +155,6 @@ var JoyStick = (function(container, parameters) {
 			{
 			try
 				{
-				var rect = canvas.getBoundingClientRect();
-
-				var canvasWidth = rect.left + canvas.offsetWidth;
-				var canvasHeight = rect.top;
-
-				var currentFinger = -1;
-				for (var i=0; i < event.touches.length; i++)
-					{
-					if (event.touches[i].pageX<=canvasWidth && event.touches[i].pageY>=canvasHeight)
-						{
-						currentFinger = i;
-						}
-					}
-
 				if (currentFinger>-1)
 					{
 					movedX=event.touches[currentFinger].pageX;
@@ -178,6 +178,7 @@ var JoyStick = (function(container, parameters) {
 	function onTouchEnd(event) 
 	{
 		pressed=0;
+		currentFinger=-1;
 		// Reset position store variable
 		movedX=centerX;
 		movedY=centerY;
