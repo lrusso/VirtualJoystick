@@ -135,14 +135,14 @@ var JoyStick = (function(container, parameters) {
 	{
 		pressed=1;
 
+		// clientX/clientY and getBoundingClientRect() are both relative to the
+		// viewport, so they always agree. pageX/pageY are relative to the
+		// document and drift from rect by the scroll offset.
 		var rect = canvas.getBoundingClientRect();
-
-		var canvasWidth = rect.left + canvas.offsetWidth;
-		var canvasHeight = rect.top;
 
 		for (var i=0; i < event.touches.length; i++)
 			{
-			if (event.touches[i].pageX<=canvasWidth && event.touches[i].pageY>=canvasHeight)
+			if (event.touches[i].clientX<=rect.right && event.touches[i].clientY>=rect.top)
 				{
 				currentFinger = i;
 				}
@@ -157,11 +157,14 @@ var JoyStick = (function(container, parameters) {
 				{
 				if (currentFinger>-1)
 					{
-					movedX=event.touches[currentFinger].pageX;
-					movedY=canvas.height - (window.innerHeight - event.touches[currentFinger].pageY);
-					// Manage offset
-					movedX-=canvas.offsetLeft;
-					//movedY-=canvas.offsetTop;
+					// Ask the browser where the canvas actually is instead of
+					// inferring it from window.innerHeight. on ios the layout and
+					// visual viewports differ by the height of safari's toolbar
+					// whenever it is drawn, which offset the touch by exactly that
+					// much while the canvas kept being painted in the right place.
+					var rect = canvas.getBoundingClientRect();
+					movedX=event.touches[currentFinger].clientX - rect.left;
+					movedY=event.touches[currentFinger].clientY - rect.top;
 					// Delete canvas
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					// Redraw object
@@ -200,11 +203,9 @@ var JoyStick = (function(container, parameters) {
 	{
 		if(pressed==1)
 		{
-			movedX=event.pageX;
-			movedY=canvas.height - (window.innerHeight - event.pageY);
-			// Manage offset
-			movedX-=canvas.offsetLeft;
-			movedY-=canvas.offsetTop;
+			var rect = canvas.getBoundingClientRect();
+			movedX=event.clientX - rect.left;
+			movedY=event.clientY - rect.top;
 			// Delete canvas
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			// Redraw object
