@@ -4,7 +4,7 @@ Virtual Joystick for mobile devices based on bobboteck code, with several improv
 
 ![alt screenshot](https://raw.githubusercontent.com/lrusso/VirtualJoystick/master/VirtualJoystick.png)
 
-## Web:
+## Website:
 
 https://lrusso.github.io/VirtualJoystick/VirtualJoystick.htm
 
