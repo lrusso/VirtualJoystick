@@ -1,6 +1,6 @@
 # Virtual Joystick
 
-Virtual Joystick for mobile devices.
+Virtual Joystick for mobile devices in JavaScript.
 
 ![alt screenshot](https://raw.githubusercontent.com/lrusso/VirtualJoystick/master/VirtualJoystick.png)
 
